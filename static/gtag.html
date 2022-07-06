@@ -134,8 +134,11 @@
       <li class="custom-nav_item">
         <a href="charts.html">Charts</a>
       </li>
-      <li class="custom-nav_item active">
+      <li class="custom-nav_item">
         <a href="icons.html">Icons</a>
+      </li>
+      <li class="custom-nav_item active">
+        <a href="gtag.html">GTAG</a>
       </li>
     </ul>
   </aside>
@@ -147,10 +150,14 @@
     <div class="card-body row">
       <div class="col-12">
         <div class="card w-100 card-stripped p-3">
-          <div class="d-flex my-2">
+          <h4>BUTTON</h4>
+          <h5>Add attribute for button: data-analytic="[specific_name]"</h5>
+          <div class="d-flex mt-2 mb-4">
             <button class="btn btn-basic btn-lg mr-2" data-analytic="button-action">Action</button>
           </div>
-          <div class="col-3 px-0">
+          <div class="col-6 px-0 mt-2 mb-4">
+            <h4>INPUT</h4>
+            <h5>Add attribute for input: data-analytic="[specific_name]"</h5>
             <div class="custom-input mb-3">
               <input
                 data-analytic="input-field"
@@ -158,7 +165,9 @@
                 placeholder="Text">
             </div>
           </div>
-          <div class="col-3 px-0">
+          <div class="col-5 px-0 mt-2 mb-4">
+            <h4>SELECTPICKER</h4>
+            <h5>Add attribute for select: data-analytic="[specific_name]"</h5>
             <div class="custom-input mb-3">
               <select class="selectpicker mb-3" data-style="btn" data-analytic="dropdown">
                 <option>Mustard</option>
@@ -167,12 +176,14 @@
               </select>
             </div>
           </div>
-          <div class="d-flex my-2">
+          <h4>CHECKBOX</h4>
+          <h5>Add attribute for input: data-analytic="[specific_name]"</h5>
+
+          <div class="d-flex mt-2 mb-4">
             <label class="mb-0 d-flex align-items-center custom-checkbox">
               <input
                 checked
                 data-analytic="checkbox-attr"
-                class="mx-2"
                 type="checkbox">
               <span class="w-100 d-inline-block"></span>
             </label>
