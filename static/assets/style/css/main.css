@@ -2700,6 +2700,12 @@ td.disabled input {
   background-image: url("../../../assets/ico/minus.svg");
   background-size: 10px;
 }
+.custom-checkbox__minus input[type=checkbox]::before {
+  border-color: var(--purple);
+  background-color: var(--purple);
+  background-image: url("../../../../../static/assets/ico/minus.svg");
+  background-size: 10px;
+}
 
 /* checkbox multicolor */
 .custom-checkbox.custom-checkbox__multicolor input[type=checkbox]::before {

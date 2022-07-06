@@ -48,6 +48,14 @@
       background-size: 10px;
     }
   }
+  &__minus {
+    input[type=checkbox]::before {
+      border-color: var(--purple);
+      background-color: var(--purple);
+      background-image: url("../../../../../static/assets/ico/minus.svg");
+      background-size: 10px;
+    }
+  }
 }
 
 /* checkbox multicolor */

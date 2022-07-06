@@ -72,6 +72,12 @@ const TreeList = {
             console.log(`SELECTED TREE ITEMS: ${val}`)
         }
     },
+<<<<<<< Updated upstream
+=======
+    // mounted() {
+    //     if (this.allSelected) this.selectAllItems(this.itemsListTree);
+    // },
+>>>>>>> Stashed changes
     methods: {
         selectAllItems(values) {
             values.forEach(value => {
@@ -97,6 +103,20 @@ const TreeList = {
             if(type === 'group' && !e.target.checked && e.target.checked !== undefined) {
                 console.log(e)
             }
+
+
+            // if(!relatedId) {
+            //     this.selectedItems.push(item.id)
+            // }
+            // console.log(relatedId, item, e);
+
+            // if (!e.target.checked && e.target.checked !== undefined) {
+            //     this.selectedItems = this.selectedItems
+            //         .filter(v => !this.selectRelatedItems(item).includes(v))
+            //         .filter(v => v !== item.id)
+            // } else if (e.target.checked) {
+            //     this.selectedItems = [...this.selectedItems, ...this.selectRelatedItems(item), item.id];
+            // }
         }
     },
     template: `
@@ -131,6 +151,7 @@ const TreeList = {
                             ></i>
                             <label
                                 @click="toggleItem(item1lvl, $event, null, item1lvl.type)"
+<<<<<<< Updated upstream
                                 class="mb-0 w-100 d-flex align-items-center custom-checkbox">
                                 <input
                                     type="checkbox">
@@ -141,6 +162,18 @@ const TreeList = {
                             <label
                                 class="mb-0 w-100 d-flex align-items-center custom-checkbox">
                                 <input
+=======
+                                class="mb-0 w-100 d-flex align-items-center custom-checkbox">
+                                <input
+                                    type="checkbox">
+                                <span class="w-100 d-inline-block ml-3">{{ item1lvl.title }}</span>
+                            </label>
+                        </p>
+                        <p v-else class="d-flex align-items-center px-3 position-relative">
+                            <label
+                                class="mb-0 w-100 d-flex align-items-center custom-checkbox">
+                                <input
+>>>>>>> Stashed changes
                                     @click="toggleItem(item1lvl, $event)"
                                     type="checkbox">
                                 <span class="w-100 d-inline-block ml-3">{{ item1lvl.title }}</span>
@@ -148,6 +181,23 @@ const TreeList = {
                         </p>
                         <div v-if="item1lvl.items && item1lvl.showItems" class="ml-4">
                             <div v-for="item2lvl in item1lvl.items" :key="item2lvl.id">
+<<<<<<< Updated upstream
+=======
+<!--                                <p v-if="item2lvl.type === 'group'" class="d-flex align-items-center px-3 position-relative">-->
+<!--                                    <i class="fa fa-sort-down position-absolute"-->
+<!--                                        v-if="item2lvl.items"-->
+<!--                                        @click="item2lvl.showItems = !item2lvl.showItems"-->
+<!--                                        :style="[!item2lvl.showItems ? 'transform: rotate(270deg)' : '']"-->
+<!--                                    ></i>-->
+<!--                                    <label-->
+<!--                                        @click="checkItem(item2lvl, $event)"-->
+<!--                                        class="mb-0 w-100 d-flex align-items-center custom-checkbox">-->
+<!--                                        <input-->
+<!--                                            type="checkbox">-->
+<!--                                        <span class="w-100 d-inline-block ml-3">{{ item2lvl.title }}</span>-->
+<!--                                    </label>-->
+<!--                                </p>-->
+>>>>>>> Stashed changes
                                 <p v-if="item2lvl.type !== 'group'" class="d-flex align-items-center px-3 position-relative">
                                     <label
                                         class="mb-0 w-100 d-flex align-items-center custom-checkbox">
@@ -157,6 +207,23 @@ const TreeList = {
                                         <span class="w-100 d-inline-block ml-3">{{ item2lvl.title }}</span>
                                     </label>
                                 </p>
+<<<<<<< Updated upstream
+=======
+<!--                                <div v-if="item2lvl.items && item2lvl.showItems" class="ml-4">-->
+<!--                                    <div v-for="item3lvl in item2lvl.items" :key="item3lvl.id">-->
+<!--                                        <p class="d-flex align-items-center px-3">-->
+<!--                                            <label-->
+<!--                                                class="mb-0 w-100 d-flex align-items-center custom-checkbox">-->
+<!--                                                <input-->
+<!--                                                    :value="item3lvl.id"-->
+<!--                                                    v-model="selectedItems"-->
+<!--                                                    type="checkbox">-->
+<!--                                                <span class="w-100 d-inline-block ml-3">{{ item3lvl.title }}</span>-->
+<!--                                            </label>-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
@@ -337,6 +404,7 @@ const ComplexListFilter = {
                         <label
                             class="mb-0 w-100 d-flex align-items-center custom-checkbox"
                             :class="{ 'custom-checkbox__minus': isAllSelected }">
+<<<<<<< Updated upstream
                             <input
                                 @click="handlerSelectAll"
                                 :ref="refSearchId"
@@ -349,6 +417,8 @@ const ComplexListFilter = {
                         v-for="item in foundItems" :key="item.id">
                         <label
                             class="mb-0 w-100 d-flex align-items-center custom-checkbox">
+=======
+>>>>>>> Stashed changes
                             <input
                                 :value="item"
                                 v-model="selectedItems"
