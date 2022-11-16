@@ -38,10 +38,6 @@ const TextToggle = {
             this.selected_value = this.find_by_value(this.modelValue)
         } else if (this.pre_selected_index !== null && this.pre_selected_index <= this.labels.length - 1) {
             this.selected_value = this.formatted_labels[this.pre_selected_index]
-            // this.selected_value = this.find_by_value(this.pre_selected_index)
-            // this.selected_value = this.return_ids ? this.formatted_labels[this.pre_selected_index].idx
-            //     : this.formatted_labels[this.pre_selected_index].name
-            // this.selected_value = this.formatted_labels[this.pre_selected_index]
         }
     },
     computed: {
