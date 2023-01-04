@@ -14,6 +14,9 @@
 }
 .table-hover tbody tr:hover {
   background-color: var(--gray100);
+  a {
+    color: #2F7DF1;
+  }
 }
 .thead-light th {
   background-color: var(--background) !important;
@@ -42,7 +45,10 @@
     }
   }
 }
-
+.thead-light.bg-transparent th {
+  background-color: white !important;
+  border-top: none !important;
+}
 .params-table td {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -71,8 +77,8 @@
 }
 
 .card-body .table td {
-  font-size: 12px;
-  font-weight: 300px;
+  font-size: 14px;
+  font-weight: 400;
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -188,6 +194,10 @@ td.disabled input {
       td {
         color: var(--gray800);
         font-size: 14px;
+        a:hover {
+          color: #2F7DF1;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -394,4 +404,58 @@ td.disabled input {
 
 .table-card-result tr td {
   vertical-align: baseline;
+}
+
+tr.highlight {
+  border-left: 2px solid var(--basic);
+  border-top: 1px solid var(--gray200);
+  border-bottom: 1px solid var(--gray200);
+  cursor: pointer;
+  background: var(--gray100);
+  color: var(--basic);
+  td:first-child {
+    padding-left: 18px !important;
+  }
+  td:last-child {
+    div {
+      display: flex !important;
+    }
+  }
+}
+
+.bootstrap-table {
+  .bucket-name {
+    width: 124px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+  }
+}
+
+.table-fix-thead {
+  table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+  }
+
+  thead {
+    flex: 0 0 auto;
+  }
+
+  tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+  }
+  tr:not(.highlight) {
+    border-bottom: none !important;
+  }
 }
