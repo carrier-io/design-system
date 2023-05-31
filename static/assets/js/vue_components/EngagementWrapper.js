@@ -119,8 +119,9 @@ const TopEngagementCard = {
                 </button>
             </div>
             <div class="d-flex align-items-center">
-                <div class="mr-3">
-                    <img src="/issues/static/ico/circle.svg"> Green
+                <div class="d-flex align-items-end mr-2">
+                    <i class="icon__16x16 icon-circle-green__16"></i> 
+                    <div class="d-inline-block">Green</div>
                 </div>
                 <div class="d-flex align-items-center">
                     <i class="icon__18x18 icon-date-picker mr-1"></i>
@@ -133,6 +134,9 @@ const TopEngagementCard = {
     </div>
     `
 }
+
+register_component('engagement-card', TopEngagementCard);
+
 
 const EngagementsListAside = {
     emits: ['engagementSelected', 'engagementsListUpdated'],
@@ -156,7 +160,7 @@ const EngagementsListAside = {
     },
     computed: {
         responsiveTableHeight() {
-            return `${(window.innerHeight - 286)}px`;
+            return `${(window.innerHeight - 235)}px`;
         }
     },
     methods: {
@@ -219,7 +223,7 @@ const EngagementsListAside = {
 
     },
     template: `
-        <aside class="m-3 card card-table-sm" style="width: 340px">
+        <aside id="engagement-wrapper" class="m-3 card card-table-sm" style="width: 340px">
             <div class="row px-4 pt-4">
                 <div class="col-8">
                     <h4>Engagements</h4>
@@ -262,14 +266,122 @@ function nameFormatter(value, row){
     if(allEngagement){
         return value
     }
-    txt = `<div class="pl-2"><img class="mr-2" src="/issues/static/ico/circle.svg">${value}</div>`
+    txt = `<div class="pl-2 d-flex align-items-end">
+                <i class="icon__16x16 icon-circle-green__16"></i>
+                ${value}
+            </div>`
     return txt
 }
 
+const OverviewCard = {
+    props: {
+        url: {},
+        engagement: {
+            default: null,
+        },
+        engagements_count:{
+            default: 0
+        },
+    },
+    data() {
+        return {
+            stats: {},
+            in_progress: 0,
+            done: 0,
+            activity: 0,
+            vulnerability: 0
+        }
+    },
+    watch: {
+        async engagement(){
+            await this.fetchStats()
+        },
+    },
+    async mounted(){
+        await this.fetchStats() 
+    },
+    methods: {
+        SET_STATS(data){
+            this.stats = data
+            this.in_progress = data['state_count']['in_progress'] ? data['state_count']['in_progress'] : 0 
+            this.done = data['state_count']['done'] ? data['state_count']['done'] : 0 
+            this.activity = data['types_count']['Activity'] ? data['types_count']['Activity']: 0
+            this.vulnerability = data['types_count']['Vulnerability']?data['types_count']['Vulnerability']:0
+        },
+        async fetchStats(){
+            params = {}
+            if (this.engagement){
+                params = {params: {engagement: this.engagement.hash_id}}
+            }
+            const resp = await axios.get(this.url, params)
+            this.SET_STATS(resp.data)
+        },
+    },
+    template: `
+        <div class="card mt-3 p-2">
+            <div class="card-body">
+                <div class="row">
+                    
+                    <div class="col" v-if="!engagement">
+                        <div class="card card-sm card-gray">
+                            <div class="card-header">{{engagements_count}}</div>
+                            <div class="card-body">ENGAGEMENTS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="card card-sm card-gray">
+                            <div class="card-header">{{stats['total']}}</div>
+                            <div class="card-body">TICKETS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col" v-if="engagement">
+                        <div class="card card-sm card-gray">
+                            <div class="card-header">{{in_progress}}</div>
+                            <div class="card-body">IN PROGRESS</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-sm card-gray">
+                            <div class="card-header">{{done}}</div>
+                            <div class="card-body">TICKETS DONE</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-sm card-gray">
+                            <div class="card-header">{{activity}}</div>
+                            <div class="card-body">Bugs</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-sm card-gray">
+                            <div class="card-header">{{vulnerability}}</div>
+                            <div class="card-body">Findings</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    `
+}
+
+register_component('overview-card', OverviewCard);
+
+
 const EngagementContainer = {
+    props: {
+        overview: {
+            type: Boolean,
+            default: false
+        }
+    },
     components: {
         'engagement-aside': EngagementsListAside,
-        'engagement-card': TopEngagementCard,
     },
     data() {
         return {
@@ -297,10 +409,12 @@ const EngagementContainer = {
             </engagement-aside>
             <div class="w-100 mr-3">
                 <div v-if="selectedEngagement.id!=-1">
-                    <engagement-card
-                        :engagement="selectedEngagement"
-                    >
-                    </engagement-card>
+                    <slot name="in_engagement_navbar" :master="this">
+                    </slot>
+                </div>
+                <div v-else>
+                    <slot name="general_navbar" :master="this">
+                    </slot>
                 </div>
                 <div>
                     <slot name="content" :master="this">
