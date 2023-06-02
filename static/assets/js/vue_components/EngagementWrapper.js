@@ -27,14 +27,6 @@ const EngagementCreationModal = {
         }
     },
     template: `
-        <button type="button"
-            data-toggle="modal" 
-            data-target="#eng_create_modal"
-            class="btn btn-secondary btn-sm btn-icon__sm"
-        >
-            <i class="fas fa-plus"></i>
-        </button>
-
         <div id="eng_create_modal" class="modal modal-small fixed-left fade shadow-sm" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-aside" role="document">
                 <div class="modal-content">
@@ -230,10 +222,13 @@ const EngagementsListAside = {
                 </div>
                 <div class="col-4">
                     <div class="d-flex justify-content-end">
-                        <engagement-creation-modal
-                            @added="refreshEngagements"
+                        <button type="button"
+                            data-toggle="modal" 
+                            data-target="#eng_create_modal"
+                            class="btn btn-secondary btn-sm btn-icon__sm"
                         >
-                        </engagement-creation-modal>
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -258,6 +253,11 @@ const EngagementsListAside = {
                 </div>
             </div>
         </aside>
+
+        <engagement-creation-modal
+            @added="refreshEngagements"
+        >
+        </engagement-creation-modal>
     `
 }
 
